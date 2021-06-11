@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Book;
 use App\Models\Theme;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class BookFactory extends Factory
@@ -23,7 +24,7 @@ class BookFactory extends Factory
     public function definition()
     {
         return [
-            'theme_id'=>Theme::factory(),
+            'user_id'=>User::factory(),
             'name'=>$this->faker->realText($maxNbChars = 10),
             'title'=>$this->faker->realText($maxNbChars = 25),
             'publisher'=>$this->faker->realText($maxNbChars = 25),

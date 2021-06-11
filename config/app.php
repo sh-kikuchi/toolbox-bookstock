@@ -165,6 +165,8 @@ return [
         /*
          * Package Service Providers...
          */
+         Kyslik\ColumnSortable\ColumnSortableServiceProvider::class, //ソート機能の追加
+
 
         /*
          * Application Service Providers...
