@@ -15,8 +15,11 @@ class CreateReviewsTable extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('theme_id')->unsigned();
+            $table->foreign('theme_id')->references('id')->on('themes')->onDelete('cascade');
             $table->bigInteger('book_id')->unsigned();
             $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade');
+            $table->string('category')->default("要約");
             $table->string('review');
             $table->bigInteger('s_page')->unsigned();
             $table->bigInteger('e_page')->unsigned();
