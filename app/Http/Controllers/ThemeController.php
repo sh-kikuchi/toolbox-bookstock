@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Theme;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use \App\Http\Requests\ThemeRequest;
 
 class ThemeController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,72 +20,38 @@ class ThemeController extends Controller
      */
     public function index()
     {
-        //
+        $themes = Theme::where('user_id',Auth::id()) -> get();
+        return view('theme.index',compact('themes'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $theme = new theme;
+        $theme -> user_id = Auth::id();
+        $theme -> theme  = $request -> theme_name;
+        $theme -> save();
+        return redirect('/');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Theme  $theme
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Theme $theme)
+    public function edit($themeId)
     {
-        //
+        $theme = Theme::where('id',$themeId)
+        ->first();
+        return view('theme.edit',compact('theme'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Theme  $theme
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Theme $theme)
+    public function update(Request $request)
     {
-        //
+        $theme = Theme::find($request -> theme_id);
+        $theme -> theme  = $request -> theme_name;
+        $theme -> save();
+        return redirect('/');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Theme  $theme
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Theme $theme)
+    public function destroy($themeId)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Theme  $theme
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Theme $theme)
-    {
-        //
+        $theme = Theme::find($themeId);
+        $theme->delete();
+        return redirect('/');
     }
 }
