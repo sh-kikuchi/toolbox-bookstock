@@ -25,7 +25,7 @@ class ReviewRequest extends FormRequest
     {
         return [
             'review'=>'required|string|max:400',
-            's_page'=>'required|numeric'
+            's_page'=>'required|numeric',
             'e_page'=>'required|numeric',
         ];
     }

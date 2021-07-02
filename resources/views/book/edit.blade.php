@@ -6,26 +6,26 @@
         <h2>※下記のフォームを入力して下さい（※＝入力必須）</h2>
         <!-- テーマIDを格納しておく -->
         <div class="form-group">
-          <input hidden type="number" class="form-control" name="theme_id" value="{{$themeId}}" required>
+          <input hidden type="number" class="form-control" name="theme_id" value="{{$theme->id}}" required>
         </div>
         <div class="form-group">
           <label for="author">筆者（※）</label>
-          <input type="text" class="form-control" name="author" value="{{$book -> name}}" required>
+          <input type="text" class="form-control" name="author" value="{{$book->name}}" required>
           @if($errors->has('author')) <span class="text-danger">{{ $errors->first('author') }}</span> @endif
         </div>
         <div class="form-group">
           <label for="author">タイトル（※）</label>
-          <input type="text" class="form-control" name="title" value="{{$book -> title}}" required>
+          <input type="text" class="form-control" name="title" value="{{$book->title}}" required>
           @if($errors->has('title')) <span class="text-danger">{{ $errors->first('title') }}</span> @endif
         </div>
         <div class="form-group">
           <label for="publisher">出版社（※）</label>
-          <input type="text" class="form-control" name="publisher" value="{{$book -> publisher}}" required>
+          <input type="text" class="form-control" name="publisher" value="{{$book->publisher}}" required>
           @if($errors->has('publisher')) <span class="text-danger">{{ $errors->first('publisher') }}</span> @endif
         </div>
         <div class="form-group">
           <label for="year">出版年（※）</label>
-          <input type="number" class="form-control" name="year" value="{{$book -> year}}" required>
+          <input type="number" class="form-control" name="year" value="{{$book->year}}" required>
           @if($errors->has('year')) <span class="text-danger">{{ $errors->first('year') }}</span> @endif
         </div>
         <div class="form-group">
@@ -37,6 +37,6 @@
                @endforeach
             </select>
         </div>
-        <button type="submit" class="btn btn-primary" name="book_id" value ="{{$book -> id }}">Submit</button>
+        <button type="submit" class="btn btn-primary" name="book_id" value ="{{$book->id }}">Submit</button>
     </form>
 @endsection

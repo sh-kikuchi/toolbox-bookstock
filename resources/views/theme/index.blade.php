@@ -23,9 +23,9 @@
             <tbody>
             <tr>
                 <th scope="row">{{ $theme -> theme }}</th>
-                <td class="text-center"> <a href="{{ route('book.index', $theme -> id ) }}"><i class="far fa-check-circle"></i></a></td>
-                <td class="text-center"> <a href="{{ route('theme.edit', $theme -> id ) }}"><i class="far fa-edit"></i></a></td>
-                <td class="text-center"><a  onclick="return confirm('このカードを削除して良いですか?')" rel="nofollow" data-method="delete" href="{{ route('theme.destroy', $theme -> id ) }}"><i class="far fa-trash-alt"></i></a></td>
+                <td class="text-center"> <a href="{{ route('book.index', $theme->id ) }}"><i class="far fa-check-circle"></i></a></td>
+                <td class="text-center"> <a href="{{ route('theme.edit', $theme->id ) }}"><i class="far fa-edit"></i></a></td>
+                <td class="text-center"><a  onclick="return confirm('このカードを削除して良いですか?')" rel="nofollow" data-method="delete" href="{{ route('theme.destroy', $theme->id ) }}"><i class="far fa-trash-alt"></i></a></td>
             </tr>
             </tbody>
             @endforeach
