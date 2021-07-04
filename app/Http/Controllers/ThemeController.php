@@ -33,10 +33,9 @@ class ThemeController extends Controller
         return redirect('/');
     }
 
-    public function edit($themeId)
+    public function edit(Theme $theme)
     {
-        $theme = Theme::where('id',$themeId)
-        ->first();
+        $theme = Theme::where('id',$theme->id)->first();
         return view('theme.edit',compact('theme'));
     }
 
@@ -48,9 +47,10 @@ class ThemeController extends Controller
         return redirect('/');
     }
 
-    public function destroy($themeId)
+    public function destroy(Theme $theme)
     {
-        $theme = Theme::find($themeId);
+        $this->authorize('destroy',$theme);
+        $theme = Theme::find($theme->id);
         $theme->delete();
         return redirect('/');
     }

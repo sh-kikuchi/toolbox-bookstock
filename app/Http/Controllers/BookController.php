@@ -28,12 +28,12 @@ class BookController extends Controller
          return view('book.all',compact('books'));
     }
 
-    public function index($themeId)
+    public function index(Theme $theme)
     {
         /*テーマ */
-        $theme  = Theme::where('id',$themeId)->first();
+        $theme  = Theme::where('id',$theme->id)->first();
         /*テーマ毎のブック一覧 */
-        $books = Theme::find($themeId)->books()->sortable()->paginate(10);
+        $books = Theme::find($theme->id)->books()->sortable()->paginate(10);
         return view('book.index',compact('theme','books'));
     }
 
@@ -48,25 +48,22 @@ class BookController extends Controller
         $book -> save();
 
         /*中間テーブルの追加処理*/
-        $themeId = $request -> theme_id;
-        $book->themes()->attach($themeId);
+        $theme = $request -> theme_id;
+        $book->themes()->attach($theme);
 
-        /*テーマ */
-        $theme = Theme::find($themeId)->first();
-
-        return redirect()->route('book.index',$themeId);
+        return redirect()->route('book.index',$theme);
     }
 
-    public function edit($themeId,$bookId)
+    public function edit(Theme $theme,Book $book)
     {
-        $book = Book::where('id',$bookId)->first();
-        $themes = Theme::whereNotIn('id',[$themeId])->get();
-        return view('book.edit',compact('themeId','themes','book'));
+        $book = Book::where('id',$book->id)->first();
+        $themes = Theme::whereNotIn('id',[$theme->id])->get();
+        return view('book.edit',compact('theme','themes','book'));
     }
 
     public function update(Request $request)
     {
-        $themeId            = $request -> theme_id;
+        $theme            = $request -> theme_id;
         $book = Book::find($request -> book_id);
         $book -> name       = $request -> author;
         $book -> title      = $request -> title;
@@ -81,17 +78,18 @@ class BookController extends Controller
         }
 
         $book -> save();
-        return redirect()->route('book.index',$themeId);
+        return redirect()->route('book.index',$theme);
     }
 
-    public function destroy($themeId,$bookId)
+    public function destroy(Theme $theme,Book $book)
     {
-        $book = Book::find($bookId);
+        $this->authorize('destroy',$book);
+        $book = Book::find($book->id);
         $book->delete();
 
         /*中間テーブルの削除処理 */
-        $book->themes()->detach($themeId);
-       return redirect()->route('book.index',$themeId);
+        $book->themes()->detach($theme->id);
+       return redirect()->route('book.index',$theme->id);
     }
 
     /* EXCEL出力 */

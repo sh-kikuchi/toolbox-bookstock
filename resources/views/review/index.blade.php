@@ -30,8 +30,8 @@
               <td>{{ $review -> review}}</td>
               <td class="text-center">{{ $review -> s_page}}</td>
               <td class="text-center">{{ $review -> e_page}}</td>
-              <td class="text-center"> <a href="{{ route('review.edit',['themeId' => $themeId,'bookId' => $book -> id, 'reviewId' =>  $review -> id] ) }}"><i class="far fa-edit"></i></a></td>
-              <td class="text-center"><a  onclick="return confirm('このカードを削除して良いですか?')" rel="nofollow" data-method="delete" href="{{ route('review.destroy', ['themeId' => $themeId,'bookId' => $book -> id, 'reviewId' =>  $review -> id] ) }}"><i class="far fa-trash-alt"></i></a></td>
+              <td class="text-center"> <a href="{{ route('review.edit',['theme' => $theme->id,'book' => $book->id, 'review' =>  $review->id] ) }}"><i class="far fa-edit"></i></a></td>
+              <td class="text-center"><a  onclick="return confirm('このカードを削除して良いですか?')" rel="nofollow" data-method="delete" href="{{ route('review.destroy', ['theme' => $theme->id,'book' => $book -> id, 'review' => $review->id] ) }}"><i class="far fa-trash-alt"></i></a></td>
               <td class="text-center">{{ $review -> updated_at}}</td>
             </tr>
           </tbody>
@@ -39,10 +39,10 @@
         </table>
     </div>
     <div class="tab-pane fade" id="store" role="tabpanel" aria-labelledby="store-tab">
-        <form method="POST" action="{{ route('review.store',['themeId' => $themeId,'bookId' => $book -> id]) }}">
+        <form method="POST" action="{{ route('review.store',['theme' => $theme->id, 'book' => $book->id]) }}">
             {{ csrf_field() }}
               <div class="form-group">
-                <input hidden type="number" class="form-control" name="theme_id" value="{{ $themeId }}">
+                <input hidden type="number" class="form-control" name="theme_id" value="{{ $theme->id }}">
               </div>
               <div class="form-group">
                 <label for="category">カテゴリー</label>

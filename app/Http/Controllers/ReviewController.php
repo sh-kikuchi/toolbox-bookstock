@@ -16,66 +16,69 @@ class ReviewController extends Controller
         $this->middleware('auth');
     }
 
-    public function all($bookId)
+    public function all(Book $book)
     {
         /*書誌情報 */
-        $book = Book::where('id',$bookId)->first();
+        $book = Book::where('id',$book->id)->first();
         /*レビュー一覧 */
-        $reviews = Review::where('book_id', $bookId)-> paginate(10);
+        $reviews = Review::where('book_id', $book->id)-> paginate(10);
         return view('review.all',compact('book','reviews'));
     }
 
-    public function index($themeId,$bookId)
+    public function index(Theme $theme ,Book $book)
     {
         /*書誌情報 */
-        $book = Book::where('id',$bookId)->first();
+        $book = Book::where('id',$book->id)->first();
         /*レビュー一覧 */
-        $reviews = Review::where('theme_id', $themeId)->where('book_id', $bookId)-> paginate(10);
-        return view('review.index',compact('book','reviews','themeId','bookId'));
+        $reviews = Review::where('theme_id', $theme->id )->where('book_id', $book->id)-> paginate(10);
+
+        return view('review.index',compact('book','reviews','theme'));
     }
 
     public function store(Request $request)
     {
-        $themeId  = $request -> theme_id;
-        $bookId   = $request  -> book_id;
+        $theme  = $request -> theme_id;
+        $book   = $request  -> book_id;
 
         $review = new Review;
-        $review -> book_id   = $bookId;
-        $review -> theme_id  = $themeId;
+        $review -> user_id     = Auth::id();
+        $review -> book_id   = $book;
+        $review -> theme_id  = $theme;
         $review -> category  = $request -> category;
         $review -> review    = $request -> review;
         $review -> s_page    = $request -> s_page;
         $review -> e_page    = $request -> e_page;
         $review -> save();
 
-        return redirect()->route('review.index', ['themeId' => $themeId,'bookId'=>$bookId]);
+        return redirect()->route('review.index', ['theme' => $theme,'book'=>$book]);
     }
 
-    public function edit($themeId,$bookId,$reviewId)
+    public function edit(Theme $theme, Book $book , Review $review)
     {
-        $review = Review::where('id',$reviewId)->first();
-        return view('review.edit',compact('themeId','bookId','review'));
+        $review = Review::where('id',$review->id)->first();
+        return view('review.edit',compact('theme','book','review'));
     }
 
     public function update(Request $request)
     {
-        $themeId           = $request -> theme_id;
-        $bookId            = $request -> book_id;
+        $theme =   Theme::find($request -> theme_id);
+        $book  =   Book::find($request -> book_id);
+
         $review =  Review::find($request -> review_id);
         $review -> category = $request -> category;
         $review -> review  = $request -> review;
         $review -> s_page  = $request -> s_page;
         $review -> e_page  = $request -> e_page;
         $review -> save();
-        //  return view('review.index',compact('themeId','bookId'));
-         return redirect()->route('review.index', ['themeId' => $themeId,'bookId'=>$bookId]);
+        return redirect()->route('review.index', ['theme' => $theme,'book'=>$book]);
     }
 
-    public function destroy($themeId,$bookId,$reviewId)
+    public function destroy(Theme $theme, Book $book,Review $review)
     {
-        $review = Review::find($reviewId);
+        $this->authorize('destroy',$review);
+        $review = Review::find($review->id);
         $review->delete();
-         return redirect()->route('review.index', ['themeId' => $themeId,'bookId'=>$bookId]);
+        return redirect()->route('review.index', ['theme' => $theme->id,'book'=>$book->id]);
     }
 
     /* EXCEL出力 */

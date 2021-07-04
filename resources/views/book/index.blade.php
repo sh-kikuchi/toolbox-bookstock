@@ -30,9 +30,9 @@
                 <td>{{ $book -> title }}</td>
                 <td>{{ $book -> publisher }}</td>
                 <td>{{ $book -> year }}</td>
-                <td class="text-center"> <a href="{{ route('review.index',['themeId' => $theme -> id, 'bookId' =>  $book -> id] ) }}"><i class="far fa-check-circle"></i></a></td>
-                <td class="text-center"> <a href="{{ route('book.edit',['themeId' => $theme -> id, 'bookId' =>  $book -> id]) }}"><i class="far fa-edit"></i></a>　</td>
-                <td class="text-center"> <a  onclick="return confirm('このカードを削除して良いですか?')" rel="nofollow" data-method="delete" href="{{ route('book.destroy',['themeId' => $theme -> id, 'bookId' =>  $book -> id]) }}"><i class="far fa-trash-alt"></i></a></td>
+                <td class="text-center"> <a href="{{ route('review.index',['theme' => $theme->id, 'book' => $book->id] ) }}"><i class="far fa-check-circle"></i></a></td>
+                <td class="text-center"> <a href="{{ route('book.edit',['theme' => $theme -> id, 'book' => $book->id]) }}"><i class="far fa-edit"></i></a>　</td>
+                <td class="text-center"> <a  onclick="return confirm('このカードを削除して良いですか?')" rel="nofollow" data-method="delete" href="{{ route('book.destroy',['theme' => $theme->id, 'book' => $book->id]) }}"><i class="far fa-trash-alt"></i></a></td>
             </tr>
             </tbody>
             @endforeach
@@ -40,7 +40,7 @@
         <p class="text-center">{{ $books->links() }}</p>
     </div>
     <div class="tab-pane fade" id="store" role="tabpanel" aria-labelledby="store-tab">
-        <form method="POST" action="{{ route('book.store', $theme -> id) }}">
+        <form method="POST" action="{{ route('book.store', $theme->id) }}">
             {{ csrf_field() }}
              <h4 class="text-center">書誌情報を登録する（全項目入力必須）</h4>
             <form>

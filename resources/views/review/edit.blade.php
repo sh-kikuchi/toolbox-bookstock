@@ -5,10 +5,10 @@
           <h2>レビューを更新</h2>
           <!-- ブックIDを格納しておく -->
           <div class="form-group">
-           <input hidden type="number" class="form-control" name="theme_id" value="{{$themeId}}" required>
+           <input hidden type="number" class="form-control" name="theme_id" value="{{$theme->id}}" required>
           </div>
           <div class="form-group">
-           <input hidden type="number" class="form-control" name="book_id" value="{{$bookId}}" required>
+           <input hidden type="number" class="form-control" name="book_id" value="{{$book->id}}" required>
           </div>
           <div class="form-group">
             <label for="category">カテゴリー</label>
