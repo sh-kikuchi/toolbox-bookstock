@@ -10,13 +10,13 @@
 </ul>
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="index" role="tabpanel" aria-labelledby="index-tab">
-        <table class="table table-striped">
+        <table class="table">
             <thead>
             <tr>
-                <th scope="col" class="text-center" style="width: 85%">テーマ</th>
-                <th scope="col" class="text-center" style="width: 5%">選択</th>
-                <th scope="col" class="text-center" style="width: 5%">編集</th>
-                <th scope="col" class="text-center" style="width: 5%">削除</th>
+                <th scope="col" class="text-center" style="width: 76%">テーマ</th>
+                <th scope="col" class="text-center" style="width: 8%">選択</th>
+                <th scope="col" class="text-center" style="width: 8%">編集</th>
+                <th scope="col" class="text-center" style="width: 8%">削除</th>
             </tr>
             </thead>
             @foreach($themes as $theme)
@@ -34,9 +34,9 @@
     <div class="tab-pane fade" id="store" role="tabpanel" aria-labelledby="store-tab">
         <form method="POST" action="{{ route('theme.store') }}">
             {{ csrf_field() }}
-             <h2>テーマをつくりましょう。</h2>
-            <div class="form-group row">
-                <input class="form-control col-8 col-sm-10 ml-3 " type="text" name = "theme_name" placeholder="50字以内" maxlength="50" required>
+            <h3 class="text-center mt-2">テーマをつくりましょう。</h3>
+            <div class="form-group d-flex justify-content-center">
+                <input class="form-control col-8 col-sm-10 ml-2 " type="text" name = "theme_name" placeholder="50字以内" maxlength="50" required>
                 @if($errors->has('theme_name')) <span class="text-danger">{{ $errors->first('theme_name') }}</span> @endif
                 <button type="submit" class="btn btn-secondary col-2 col-sm-1 ml-2"><i class="far fa-paper-plane"></i></button>
             </div>

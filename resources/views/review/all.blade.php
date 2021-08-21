@@ -1,7 +1,7 @@
 @extends('layouts.header')
 @section('content')
 <h4 class="text-center">【タイトル】{{ $book -> title }}</h4>
-    <table class="table table-striped">
+    <table class="table">
       <thead>
         <tr>
           <th scope="col" class="text-center" style="width: 10%">カテゴリー</th>

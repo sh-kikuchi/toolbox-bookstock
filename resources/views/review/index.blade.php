@@ -11,7 +11,7 @@
 </ul>
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="index" role="tabpanel" aria-labelledby="index-tab">
-        <table class="table table-striped">
+        <table class="table">
           <thead>
             <tr>
               <th scope="col" class="text-center" style="width: 10%">カテゴリー</th>
@@ -39,29 +39,29 @@
         </table>
     </div>
     <div class="tab-pane fade" id="store" role="tabpanel" aria-labelledby="store-tab">
-        <form method="POST" action="{{ route('review.store',['themeId' => $themeId,'bookId' => $book -> id]) }}">
+        <form method="POST" class="row d-block"action="{{ route('review.store',['themeId' => $themeId,'bookId' => $book -> id]) }}">
             {{ csrf_field() }}
-              <div class="form-group">
+              <div class="form-group col-11 mx-auto">
                 <input hidden type="number" class="form-control" name="theme_id" value="{{ $themeId }}">
               </div>
-              <div class="form-group">
+              <div class="form-group col-11 mx-auto">
                 <label for="category">カテゴリー</label>
                 <select class="form-control" name="category">
                     <option value="要約">要約（間接引用含む）</option>
                     <option value="直接引用">直接引用（元の文章をそのまま引用）</option>
                 </select>
               </div>
-              <div class="form-group">
+              <div class="form-group col-11 mx-auto">
                 <label for="publisher">レビュー</label>
                 <textarea class="form-control text-center" name="review" placeholder="レビュー"  row="3" required></textarea>
                 @if($errors->has('review')) <span class="text-danger">{{ $errors->first('review') }}</span> @endif
               </div>
-              <div class="form-group">
+              <div class="form-group col-11 mx-auto">
                 <label for="s_page">開始頁</label>
                 <input type="number" class="form-control text-center" name="s_page" placeholder="開始頁" required>
                 @if($errors->has('s_page')) <span class="text-danger">{{ $errors->first('s_page') }}</span> @endif
               </div>
-              <div class="form-group">
+              <div class="form-group col-11 mx-auto">
                 <label for="e_page">修了頁</label>
                 <input type="number" class="form-control text-center" name="e_page" placeholder="修了頁" required>
                 @if($errors->has('e_page')) <span class="text-danger">{{ $errors->first('e_page') }}</span> @endif

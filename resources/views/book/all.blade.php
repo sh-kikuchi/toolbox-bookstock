@@ -5,7 +5,7 @@
     <a class="btn btn-success mb-2 ml-2" href="{{ route('book.export') }}"><i class="fas fa-file-excel"></i> ブックリスト</a>
     <a class="btn btn-success mb-2 mr-2" href="{{ route('review.export') }}"><i class="fas fa-file-excel"></i> レビューリスト</a>
 </div>
-<table class="table table-striped">
+<table class="table">
     <thead>
     <tr>
         <th scope="col" class="text-center" style="width: 20%">@sortablelink('name', '筆者')</th>
