@@ -39,17 +39,10 @@
         </table>
     </div>
     <div class="tab-pane fade" id="store" role="tabpanel" aria-labelledby="store-tab">
-<<<<<<< HEAD
-        <form method="POST" action="{{ route('review.store',['theme' => $theme->id, 'book' => $book->id]) }}">
-            {{ csrf_field() }}
-              <div class="form-group">
-                <input hidden type="number" class="form-control" name="theme_id" value="{{ $theme->id }}">
-=======
         <form method="POST" class="row d-block"action="{{ route('review.store',['themeId' => $themeId,'bookId' => $book -> id]) }}">
             {{ csrf_field() }}
               <div class="form-group col-11 mx-auto">
                 <input hidden type="number" class="form-control" name="theme_id" value="{{ $themeId }}">
->>>>>>> e6e78b6680ac78dcb93280d7433a905c730b9c8e
               </div>
               <div class="form-group col-11 mx-auto">
                 <label for="category">カテゴリー</label>

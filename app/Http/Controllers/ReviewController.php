@@ -21,7 +21,6 @@ class ReviewController extends Controller
         /*書誌情報 */
         $book = Book::where('id',$book->id)->first();
         /*レビュー一覧 */
-
         $reviews = Review::where('book_id', $bookId)
             ->orderBy('s_page')
             -> paginate(10);

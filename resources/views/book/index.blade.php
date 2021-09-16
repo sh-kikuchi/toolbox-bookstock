@@ -45,22 +45,22 @@
              <h4 class="text-center mt-2">書誌情報を登録する（全項目入力必須）</h4>
             <form class="row">
               <div class="form-group col-11 mx-auto">
-                <label for="author">筆者</label>
+                <label for="author" class="ml-2">筆者</label>
                 <input type="text" class="form-control" name="author" placeholder="筆者を入力" required>
                 @if($errors->has('author')) <span class="text-danger">{{ $errors->first('author') }}</span> @endif
               </div>
               <div class="form-group col-11 mx-auto">
-                <label for="author">タイトル</label>
+                <label for="author" class="ml-2">タイトル</label>
                 <input type="text" class="form-control" name="title" placeholder="タイトルを入力" required>
                 @if($errors->has('title')) <span class="text-danger">{{ $errors->first('title') }}</span> @endif
               </div>
               <div class="form-group col-11 mx-auto">
-                <label for="publisher">出版社</label>
+                <label for="publisher" class="ml-2">出版社</label>
                 <input type="text" class="form-control" name="publisher" placeholder="出版社を入力" required>
                 @if($errors->has('publisher')) <span class="text-danger">{{ $errors->first('publisher') }}</span> @endif
               </div>
               <div class="form-group col-11 mx-auto">
-                <label for="year">出版年</label>
+                <label for="year" class="ml-2">出版年</label>
                 <input type="number" class="form-control" name="year" placeholder="出版年を入力" required>
                 @if($errors->has('year')) <span class="text-danger">{{ $errors->first('year') }}</span> @endif
               </div>

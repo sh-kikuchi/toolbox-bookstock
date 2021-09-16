@@ -4,13 +4,8 @@
     <form method="POST" action="{{ route('book.update') }}" class="row d-block mr-0">
         {{ csrf_field() }}
         <!-- テーマIDを格納しておく -->
-<<<<<<< HEAD
-        <div class="form-group">
-          <input hidden type="number" class="form-control" name="theme_id" value="{{$theme->id}}" required>
-=======
         <div class="form-group col-11 mx-auto">
           <input hidden type="number" class="form-control" name="theme_id" value="{{$themeId}}" required>
->>>>>>> e6e78b6680ac78dcb93280d7433a905c730b9c8e
         </div>
         <div class="form-group col-11 mx-auto">
           <label for="author">筆者（※）</label>
@@ -41,10 +36,6 @@
                @endforeach
             </select>
         </div>
-<<<<<<< HEAD
-        <button type="submit" class="btn btn-primary" name="book_id" value ="{{$book->id }}">Submit</button>
-=======
         <button type="submit" class="btn btn-primary mx-auto d-block" name="book_id" value ="{{$book -> id }}">更新する</button>
->>>>>>> e6e78b6680ac78dcb93280d7433a905c730b9c8e
     </form>
 @endsection
