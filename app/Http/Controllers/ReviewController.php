@@ -21,7 +21,10 @@ class ReviewController extends Controller
         /*書誌情報 */
         $book = Book::where('id',$book->id)->first();
         /*レビュー一覧 */
-        $reviews = Review::where('book_id', $book->id)-> paginate(10);
+
+        $reviews = Review::where('book_id', $bookId)
+            ->orderBy('s_page')
+            -> paginate(10);
         return view('review.all',compact('book','reviews'));
     }
 
@@ -30,9 +33,12 @@ class ReviewController extends Controller
         /*書誌情報 */
         $book = Book::where('id',$book->id)->first();
         /*レビュー一覧 */
-        $reviews = Review::where('theme_id', $theme->id )->where('book_id', $book->id)-> paginate(10);
+        $reviews = Review::where('theme_id', $themeId)
+            ->where('book_id', $bookId)
+            ->orderBy('s_page')
+            -> paginate(10);
 
-        return view('review.index',compact('book','reviews','theme'));
+        return view('review.index',compact('book','reviews','themeId','bookId'));
     }
 
     public function store(Request $request)
