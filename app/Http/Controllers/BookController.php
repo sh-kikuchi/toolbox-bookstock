@@ -7,9 +7,9 @@ use App\Models\Book;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
-use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\BooksExport;
 use \App\Http\Requests\BookRequest;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class BookController extends Controller
 {
@@ -94,14 +94,51 @@ class BookController extends Controller
        return redirect()->route('book.index',$themeId);
     }
 
-    /* EXCEL出力 */
-    public function export(){
-	    return Excel::download(new BooksExport, 'books.xlsx');
-    }
+    public function csvExport(Request $request) {
+            $theme_id = $request->theme_id;
 
-    /* EXCEL出力 */
-    public function export_r(){
-	    return Excel::download(new ReviewsExport, 'reviews.xlsx');
-    }
+            $response = new StreamedResponse(function () use ($request, $theme_id) {
+                $stream = fopen('php://output','w');
+                // 文字化け回避
+                stream_filter_prepend($stream, 'convert.iconv.utf-8/cp932//TRANSLIT');
 
+                // ここでは仮に「products」というテーブルの全データを取得
+                $results  = Theme::find($theme_id)->books()->get();
+
+                fputcsv($stream, $this->_csvHeader());
+
+                if (empty($results[0])) {
+                        fputcsv($stream, [
+                            'データが存在しませんでした。',
+                        ]);
+                } else {
+                    foreach ($results as $row) {
+                        fputcsv($stream, $this->_csvRow($row));
+                    }
+                }
+                fclose($stream);
+            });
+            $response->headers->set('Content-Type', 'application/octet-stream');
+            $response->headers->set('content-disposition', 'attachment; filename=ブックリスト.csv');
+
+            return $response;
+        }
+
+        public function _csvRow($row){
+            return [
+                $row->name,
+                '『'.$row->title.'』',
+                $row->publisher,
+                $row->year
+            ];
+        }
+
+        public function _csvHeader(){
+            return [
+                '著者名',
+                'タイトル',
+                '出版社',
+                '出版年'
+            ];
+        }
 }
