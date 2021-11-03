@@ -1,6 +1,13 @@
 @extends('layouts.header')
 @section('content')
 <h4 class="text-center">【タイトル】{{ $book -> title }}</h4>
+<form id='csvform' class="text-right mb-2 mr-4" action="{{ route('review.csv.export') }}" method="POST">
+    @csrf
+    <input hidden name="theme_id" value ="{{ $themeId }}">
+    <input hidden name="book_id" value ="{{ $book -> id }}">
+    <input hidden name="book_title" value ="{{ $book -> title }}">
+    <button type='submit' class="btn btn-success">CSV出力</button>
+</form>
 <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item">
         <a class="nav-link active" id="index-tab" data-toggle="tab" href="#index" role="tab" aria-controls="index" aria-selected="true">レビューをさがす</a>

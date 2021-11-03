@@ -26,6 +26,6 @@ Route::post('/review/update', [App\Http\Controllers\ReviewController::class, 'up
 Route::get('/review/destroy/{themeId}/{bookId}/{reviewId}', [App\Http\Controllers\ReviewController::class, 'destroy'])->name('review.destroy');
 Route::get('/review/all/{bookId}', [App\Http\Controllers\ReviewController::class, 'all'])->name('review.all');
 
-/* Export */
-Route::get('/book/export',[App\Http\Controllers\BookController::class,'export'])->name('book.export');
-Route::get('/review/export',[App\Http\Controllers\ReviewController::class,'export'])->name('review.export');
+/*Export */
+Route::post('book/csv/export',[App\Http\Controllers\BookController::class,'csvExport'])->name('book.csv.export');
+Route::post('review/csv/export',[App\Http\Controllers\ReviewController::class,'csvExport'])->name('review.csv.export');

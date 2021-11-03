@@ -1,10 +1,6 @@
 @extends('layouts.header')
 @section('content')
 <h3 class="text-center">あなただけの本棚-全てのブックリスト-</h3>
-<div class="text-right">
-    <a class="btn btn-success mb-2 ml-2" href="{{ route('book.export') }}"><i class="fas fa-file-excel"></i> ブックリスト</a>
-    <a class="btn btn-success mb-2 mr-2" href="{{ route('review.export') }}"><i class="fas fa-file-excel"></i> レビューリスト</a>
-</div>
 <table class="table">
     <thead>
     <tr>

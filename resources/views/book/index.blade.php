@@ -1,6 +1,12 @@
 @extends('layouts.header')
 @section('content')
 <h3 class="text-center">【テーマ】{{ $theme -> theme }}</h3>
+<form id='csvform' class="text-right mb-2 mr-4" action="{{ route('book.csv.export') }}" method="POST">
+    @csrf
+    <input hidden name="theme_id" value ="{{ $theme -> id }}">
+    <button type='submit' class="btn btn-success">CSV出力</button>
+</form>
+
 <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item">
         <a class="nav-link active" id="index-tab" data-toggle="tab" href="#index" role="tab" aria-controls="index" aria-selected="true">本をさがす</a>

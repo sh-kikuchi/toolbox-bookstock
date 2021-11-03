@@ -6,9 +6,9 @@ use App\Models\Book;
 use App\Models\Theme;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Maatwebsite\Excel\Facades\Excel;
 use \App\Exports\ReviewsExport;
 use \App\Http\Requests\ReviewRequest;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ReviewController extends Controller
 {
@@ -84,8 +84,52 @@ class ReviewController extends Controller
          return redirect()->route('review.index', ['themeId' => $themeId,'bookId'=>$bookId]);
     }
 
-    /* EXCEL出力 */
-    public function export(){
-	    return Excel::download(new ReviewsExport, 'reviews.xlsx');
-    }
+    public function csvExport(Request $request) {
+            $theme_id = $request->theme_id;
+            $book_id = $request->book_id;
+
+            $response = new StreamedResponse(function () use ($request, $theme_id, $book_id) {
+                $stream = fopen('php://output','w');
+                // 文字化け回避
+                stream_filter_prepend($stream, 'convert.iconv.utf-8/cp932//TRANSLIT');
+
+                // SQL
+                $results  = Review::where('theme_id', $theme_id)->where('book_id', $book_id)->get();
+
+                fputcsv($stream, $this->_csvHeader());
+
+                if (empty($results[0])) {
+                        fputcsv($stream, [
+                            'データが存在しませんでした。',
+                        ]);
+                } else {
+                    foreach ($results as $row) {
+                        fputcsv($stream, $this->_csvRow($row));
+                    }
+                }
+                fclose($stream);
+            });
+            $response->headers->set('Content-Type', 'application/octet-stream');
+            $response->headers->set('content-disposition', 'attachment; filename='.$request->book_title.'レビュー.csv');
+
+            return $response;
+        }
+
+        public function _csvRow($row){
+            return [
+                $row->category,
+                $row->review,
+                $row->s_page,
+                $row->e_page
+            ];
+        }
+
+        public function _csvHeader(){
+            return [
+                '要約/引用',
+                'レビュー',
+                '開始頁',
+                '終了頁'
+            ];
+        }
 }
