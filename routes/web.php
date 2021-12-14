@@ -2,7 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 
-Auth::routes();
+// Auth::routes();
+//ログイン（管理者権限）：ルーティング変更
+Route::get('login', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
+Route::post('login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
+Route::get('book/stock/sdhsjfhjh/register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm']);
+Route::post('register', [App\Http\Controllers\Auth\RegisterController::class, 'register'])->name('auth.register');
+Route::post('logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+
+
 /* Theme */
 Route::get('/', [App\Http\Controllers\ThemeController::class, 'index'])->name('theme.index');
 Route::post('/theme/store', [App\Http\Controllers\ThemeController::class, 'store'])->name('theme.store');
