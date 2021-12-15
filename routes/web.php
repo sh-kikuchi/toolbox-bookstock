@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 
-// Auth::routes();
+Auth::routes();
 /* Theme */
 Route::get('/', [App\Http\Controllers\ThemeController::class, 'index'])->name('theme.index');
 Route::post('/theme/store', [App\Http\Controllers\ThemeController::class, 'store'])->name('theme.store');
