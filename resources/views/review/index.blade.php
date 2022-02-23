@@ -44,7 +44,7 @@
           </tbody>
           @endforeach
         </table>
-        <p class="text-center">{{ $reviews->links() }}</p>
+        <p class="mx-auto d-block">{{ $reviews->links() }}</p>
     </div>
     <div class="tab-pane fade" id="store" role="tabpanel" aria-labelledby="store-tab">
         <form method="POST" class="row d-block"action="{{ route('review.store',['themeId' => $themeId,'bookId' => $book -> id]) }}">
