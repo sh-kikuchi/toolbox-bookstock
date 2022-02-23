@@ -74,7 +74,7 @@
                 <input type="number" class="form-control text-center" name="e_page" placeholder="修了頁" required>
                 @if($errors->has('e_page')) <span class="text-danger">{{ $errors->first('e_page') }}</span> @endif
               </div>
-              <button type="submit" class="btn btn-primary" name ="book_id" value="{{ $book -> id }}">Submit</button>
+              <button type="submit" class="btn btn-primary mx-auto d-block" name ="book_id" value="{{ $book -> id }}">登録する</button>
         </form>
       </div>
 </div>
