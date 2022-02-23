@@ -43,7 +43,7 @@
             </tbody>
             @endforeach
         </table>
-        <p class="text-center">{{ $books->links() }}</p>
+        <p class="mx-auto d-block">{{ $books->links() }}</p>
     </div>
     <div class="tab-pane fade" id="store" role="tabpanel" aria-labelledby="store-tab">
         <form method="POST" action="{{ route('book.store', $theme -> id) }}">
