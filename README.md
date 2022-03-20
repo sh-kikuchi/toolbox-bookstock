@@ -74,9 +74,9 @@
   - レビュー閲覧
 
 ## 4. 画面遷移図
-![routes](../bookstock/public/images/bookstock.png)
+![routes](/public/images/bookstock.png)
 ## 5. データベース（ER図）
-![routes](../bookstock/public/images/bookstock.drawio.png)
+![routes](/public/images/bookstock.drawio.png)
 ## 6. 備考
 - メイン実装は2021年7月中に行い、それから少しずつ改良を加えている。
 - 2021年にかつて所属していた大学院より先生のブックレビューを依頼された時に、このアプリを使用。活躍の場が丁度あってよかった。[詳細はこちら：最終閲覧日は2022年3月20日](https://www.meiji.ac.jp/humanity/bookreview/06_hirobe_book.html)
