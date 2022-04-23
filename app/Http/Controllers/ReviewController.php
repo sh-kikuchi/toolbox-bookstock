@@ -40,7 +40,7 @@ class ReviewController extends Controller
         return view('review.index',compact('book','reviews','themeId','bookId'));
     }
 
-    public function store(Request $request)
+    public function store(ReviewRequest $request)
     {
         $themeId  = $request -> theme_id;
         $bookId   = $request  -> book_id;
@@ -63,7 +63,7 @@ class ReviewController extends Controller
         return view('review.edit',compact('themeId','bookId','review'));
     }
 
-    public function update(Request $request)
+    public function update(ReviewRequest $request)
     {
         $themeId           = $request -> theme_id;
         $bookId            = $request -> book_id;

@@ -24,7 +24,7 @@ class ThemeController extends Controller
         return view('theme.index',compact('themes'));
     }
 
-    public function store(Request $request)
+    public function store(ThemeRequest $request)
     {
         $theme = new theme;
         $theme -> user_id = Auth::id();
@@ -40,7 +40,7 @@ class ThemeController extends Controller
         return view('theme.edit',compact('theme'));
     }
 
-    public function update(Request $request)
+    public function update(ThemeRequest $request)
     {
         $theme = Theme::find($request -> theme_id);
         $theme -> theme  = $request -> theme_name;
