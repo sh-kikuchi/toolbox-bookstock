@@ -12,6 +12,9 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
+     <!-- favicon-->
+     <link rel="shortcut icon" type="image/x-icon"  href="{{ asset('/public/images/favicon.ico') }}">
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -24,7 +27,7 @@
 </head>
 <body>
     <div id="app">
-        <main class="py-2 vh-100 d-flex align-items-center" style="background-color: #DD8874;">
+        <main class="py-2 vh-100 d-flex align-items-center" style="background-color: #DD8874; overflow-x: hidden;">
             @yield('content')
         </main>
     </div>

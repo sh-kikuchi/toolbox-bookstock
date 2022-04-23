@@ -61,9 +61,9 @@
                                 @endif -->
                             </div>
                         </div>
-                        <div>
-                            <!-- <a class="nav-link text-right text-dark" href="{{ route('register') }}">Register</a> -->
-                        </div>
+                        <!-- <div>
+                            <a class="nav-link text-right text-dark" href="{{ route('register') }}">Register</a>
+                        </div> -->
                     </form>
                 </div>
             </div>
