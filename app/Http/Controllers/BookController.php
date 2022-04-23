@@ -37,7 +37,7 @@ class BookController extends Controller
         return view('book.index',compact('theme','books'));
     }
 
-    public function store(Request $request)
+    public function store(BookRequest $request)
     {
         $book = new Book;
         $book -> user_id    = Auth::id();
@@ -64,7 +64,7 @@ class BookController extends Controller
         return view('book.edit',compact('themeId','themes','book'));
     }
 
-    public function update(Request $request)
+    public function update(BookRequest $request)
     {
         $themeId            = $request -> theme_id;
         $book = Book::find($request -> book_id);
