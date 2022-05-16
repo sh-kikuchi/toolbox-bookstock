@@ -1,5 +1,6 @@
 @extends('layouts.header')
 @section('content')
+    <a class="ml-3" href="{{ url('/book/index', $themeId) }}">前へ戻る</a>
     <h3 class="text-center mb-0">書誌情報を更新する（※＝入力必須）</h3>
     <form method="POST" action="{{ route('book.update') }}" class="row d-block mr-0">
         {{ csrf_field() }}
