@@ -1,5 +1,6 @@
 @extends('layouts.header')
 @section('content')
+<a class="ml-3" href="{{ url('/')}}">前へ戻る</a>
 <h3 class="text-center">【テーマ】{{ $theme -> theme }}</h3>
 <form id='csvform' class="text-right mb-2 mr-4" action="{{ route('book.csv.export') }}" method="POST">
     @csrf
@@ -43,7 +44,9 @@
             </tbody>
             @endforeach
         </table>
-        <p class="text-center">{{ $books->links() }}</p>
+        <div class="d-flex justify-content-center">
+            <p>{{ $books->links() }}</p>
+        </div>
     </div>
     <div class="tab-pane fade" id="store" role="tabpanel" aria-labelledby="store-tab">
         <form method="POST" action="{{ route('book.store', $theme -> id) }}">
