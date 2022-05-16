@@ -1,5 +1,6 @@
 @extends('layouts.header')
 @section('content')
+ <a class="ml-3" href="{{ url('/book/index', $themeId) }}">前へ戻る</a>
 <h4 class="text-center">【タイトル】{{ $book -> title }}</h4>
 <form id='csvform' class="text-right mb-2 mr-4" action="{{ route('review.csv.export') }}" method="POST">
     @csrf
@@ -44,7 +45,9 @@
           </tbody>
           @endforeach
         </table>
-        <p class="mx-auto d-block">{{ $reviews->links() }}</p>
+        <div class="d-flex justify-content-center">
+          <p >{{ $reviews->links() }}</p>
+        </div>
     </div>
     <div class="tab-pane fade" id="store" role="tabpanel" aria-labelledby="store-tab">
         <form method="POST" class="row d-block"action="{{ route('review.store',['themeId' => $themeId,'bookId' => $book -> id]) }}">
@@ -66,12 +69,12 @@
               </div>
               <div class="form-group col-11 mx-auto">
                 <label for="s_page">開始頁</label>
-                <input type="number" class="form-control text-center" name="s_page" placeholder="開始頁" required>
+                <input type="text" class="form-control text-center" name="s_page" placeholder="開始頁" pattern="^[1-9][0-9]*$" title="0以上の数字を入力してください。" required>
                 @if($errors->has('s_page')) <span class="text-danger">{{ $errors->first('s_page') }}</span> @endif
               </div>
               <div class="form-group col-11 mx-auto">
                 <label for="e_page">修了頁</label>
-                <input type="number" class="form-control text-center" name="e_page" placeholder="修了頁" required>
+               <input type="text" class="form-control text-center" name="e_page" placeholder="修了頁"pattern="^[1-9][0-9]*$" title="0以上の数字を入力してください。"  required>
                 @if($errors->has('e_page')) <span class="text-danger">{{ $errors->first('e_page') }}</span> @endif
               </div>
               <button type="submit" class="btn btn-primary mx-auto d-block" name ="book_id" value="{{ $book -> id }}">登録する</button>
