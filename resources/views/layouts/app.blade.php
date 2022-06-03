@@ -27,7 +27,7 @@
 </head>
 <body>
     <div id="app">
-        <main class="pl-2">
+        <main class="pl-2 vh-100 d-flex align-items-center" style="background-color: #DD8874; overflow-x: hidden;">
             @yield('content')
         </main>
     </div>
