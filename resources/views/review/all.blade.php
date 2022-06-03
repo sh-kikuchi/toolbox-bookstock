@@ -1,6 +1,7 @@
 @extends('layouts.header')
 @section('content')
-<h4 class="text-center">【タイトル】{{ $book -> title }}</h4>
+<div class="p-3">
+    <h4 class="text-center">【タイトル】{{ $book -> title }}</h4>
     <table class="table">
       <thead>
         <tr>
@@ -23,4 +24,5 @@
       </tbody>
       @endforeach
     </table>
+</div>
 @endsection

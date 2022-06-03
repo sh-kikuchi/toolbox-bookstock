@@ -23,7 +23,9 @@
         <link type="text/css" rel="stylesheet" href="{{ mix('css/app.css') }}">
     </head>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #DD8874;">
+    <a href="{{ url('/') }}" style="text-decoration: none;">
         <div class="d-flex align-items-center" style="font-size:30px; color: #FCF2DD; font-weight: bold;">bookstock</div>
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>

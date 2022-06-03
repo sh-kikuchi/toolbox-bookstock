@@ -27,7 +27,7 @@
 </head>
 <body>
     <div id="app">
-        <main class="py-2 vh-100 d-flex align-items-center" style="background-color: #DD8874; overflow-x: hidden;">
+        <main class="pl-2">
             @yield('content')
         </main>
     </div>

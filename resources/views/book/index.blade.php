@@ -5,7 +5,7 @@
 <form id='csvform' class="text-right mb-2 mr-4" action="{{ route('book.csv.export') }}" method="POST">
     @csrf
     <input hidden name="theme_id" value ="{{ $theme -> id }}">
-    <button type='submit' class="btn btn-success">CSV出力</button>
+    <button type='submit' class="btn btn-success">CSVエクスポート</button>
 </form>
 
 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -16,7 +16,7 @@
         <a class="nav-link" id="store-tab" data-toggle="tab" href="#store" role="tab" aria-controls="store" aria-selected="false">本を追加する</a>
     </li>
 </ul>
-<div class="tab-content" id="myTabContent">
+<div class="tab-content p-3" id="myTabContent">
     <div class="tab-pane fade show active" id="index" role="tabpanel" aria-labelledby="index-tab">
         <table class="table">
             <thead>
@@ -53,22 +53,22 @@
             {{ csrf_field() }}
              <h4 class="text-center mt-2">書誌情報を登録する（全項目入力必須）</h4>
             <form class="row">
-              <div class="form-group col-11 mx-auto">
+              <div class="form-group col-6 mx-auto">
                 <label for="author" class="ml-2">筆者</label>
                 <input type="text" class="form-control" name="author" placeholder="筆者を入力" required>
                 @if($errors->has('author')) <span class="text-danger">{{ $errors->first('author') }}</span> @endif
               </div>
-              <div class="form-group col-11 mx-auto">
+              <div class="form-group col-6 mx-auto">
                 <label for="author" class="ml-2">タイトル</label>
                 <input type="text" class="form-control" name="title" placeholder="タイトルを入力" required>
                 @if($errors->has('title')) <span class="text-danger">{{ $errors->first('title') }}</span> @endif
               </div>
-              <div class="form-group col-11 mx-auto">
+              <div class="form-group col-6 mx-auto">
                 <label for="publisher" class="ml-2">出版社</label>
                 <input type="text" class="form-control" name="publisher" placeholder="出版社を入力" required>
                 @if($errors->has('publisher')) <span class="text-danger">{{ $errors->first('publisher') }}</span> @endif
               </div>
-              <div class="form-group col-11 mx-auto">
+              <div class="form-group col-6 mx-auto">
                 <label for="year" class="ml-2">出版年</label>
                 <input type="number" class="form-control" name="year" placeholder="出版年を入力" required>
                 @if($errors->has('year')) <span class="text-danger">{{ $errors->first('year') }}</span> @endif

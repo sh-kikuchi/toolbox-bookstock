@@ -27,3 +27,6 @@ Route::get('/review/all/{bookId}', [App\Http\Controllers\ReviewController::class
 /*Export */
 Route::post('book/csv/export',[App\Http\Controllers\BookController::class,'csvExport'])->name('book.csv.export');
 Route::post('review/csv/export',[App\Http\Controllers\ReviewController::class,'csvExport'])->name('review.csv.export');
+
+/*Import */
+Route::post('review/csv/import',[App\Http\Controllers\ReviewController::class,'csvImport'])->name('review.csv.import');
