@@ -4,6 +4,7 @@ namespace app\Http\Controllers;
 
 use App\Models\Theme;
 use App\Models\Book;
+use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
@@ -60,7 +61,7 @@ class BookController extends Controller
     public function edit($themeId,$bookId)
     {
         $book = Book::where('id',$bookId)->first();
-        $themes = Theme::whereNotIn('id',[$themeId])->get();
+        $themes = Theme::whereNotIn('id',[$themeId])->where('user_id', '=', Auth::id())->get();
         return view('book.edit',compact('themeId','themes','book'));
     }
 
@@ -87,10 +88,19 @@ class BookController extends Controller
     public function destroy($themeId,$bookId)
     {
         $book = Book::find($bookId);
-        $book->delete();
+
+        if(Book::has('themes', '>=', 2)->where('id',$bookId)->exists()){
+            //テーマを複数持っている場合、本自体の削除はおこなわない
+            Review::where('theme_id', $themeId)
+                ->where('book_id', $bookId)
+                -> delete();
+        }else{
+            $book->delete();
+        }
 
         /*中間テーブルの削除処理 */
         $book->themes()->detach($themeId);
+
        return redirect()->route('book.index',$themeId);
     }
 
